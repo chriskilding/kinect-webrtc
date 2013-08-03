@@ -1,0 +1,16 @@
+{
+    "name": "mindbeats2-rtc",
+    "private": "true",
+    "version": "0.0.1",
+    "author": "Chris Kilding <mr.chris.k@gmail.com>",
+    "dependencies": {
+        "webrtc.io": "0.0.4"
+    },
+    "scripts": {
+        "start": "node ./server"
+    },
+    "license": "MIT",
+    "engines": {
+        "node": ">=0.8"
+    }
+}

@@ -1,0 +1,16 @@
+./ffplay -f dshow -i video="OpenNi Virtual Camera"
+./ffmpeg -f dshow -i video="OpenNi Virtual Camera" ../../out.webm
+ 
+Use with FFserver
+./ffmpeg -f dshow -i video="OpenNi Virtual Camera" -f webm http://131.227.68.188:8080/feed1.ffm
+ 
+Use with stream-m (with a less silly password of course)
+./ffmpeg -f dshow -i video="OpenNi Virtual Camera" -c:v libvpx -f webm -s 512x512 -r 30 -an http://131.227.68.188:8080/publish/first?password=secret
+
+Use a filter (backticks are line continuations in Windows Powershell)
+./ffmpeg `
+-f dshow -i video="OpenNi Virtual Camera" `
+-c:v libvpx -f webm -s 512x512 -r 30 `
+-vf "colorchannelmixer=rr=0:rg=0:rb=0:ra=0" `
+-an `
+http://131.227.68.188:8080/publish/first?password=secret
