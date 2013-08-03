@@ -1,0 +1,17 @@
+{
+  "name": "mrdoob-kinect",
+  "private": "true",
+  "version": "0.0.1",
+  "author": "Chris Kilding <mr.chris.k@gmail.com>",
+  "main": "./server",
+  "dependencies": {
+    "connect": "2.4.5"
+  },
+  "scripts": {
+      "start": "node ./server"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=0.6"
+  }
+}
