@@ -1,4 +1,4 @@
-/*jslint browser: true */
+/*jslint browser: true, vars: true */
 define([
     'three',
     'stats',
@@ -8,16 +8,16 @@ define([
     
     var addVideoStream = function(src, scene, position) {
         var video = document.createElement('video');
-			video.addEventListener('loadedmetadata', function (event) {
-				var dmap = new DepthMap(video);
-                dmap.translate(position);
-				scene.add(dmap.mesh);
-			}, false);
-            
-			video.loop = false; // true;
-			video.src = src;
-    // video.src = 'http://localhost:8080/consume/first';
-			video.play();
+        video.addEventListener('loadedmetadata', function (event) {
+            var dmap = new DepthMap(video);
+            dmap.translate(position);
+            scene.add(dmap.mesh);
+        }, false);
+        
+        video.loop = false; // true;
+        video.src = src;
+        // video.src = 'http://localhost:8080/consume/first';
+        video.play();
     };
     
     var start = function () {
@@ -40,7 +40,7 @@ define([
 			stats = new Stats();
 			stats.domElement.style.position = 'absolute';
 			stats.domElement.style.top = '0px';
-            container.appendChild( stats.domElement );
+            container.appendChild(stats.domElement);
 
 			scene = new THREE.Scene();
 			center = new THREE.Vector3();

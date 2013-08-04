@@ -1,4 +1,4 @@
-// Model of a user's body from one OpenNI sensor.
+
 define([
     'three',
     'text!src/shaders/depthmapper.f.glsl',
@@ -6,6 +6,7 @@ define([
 ], function (THREE, FragmentShader, VertexShader) {
     "use strict";
 
+    // Model of a user's body from one OpenNI sensor.
     // Note, your video must have loaded first!    
     function DepthMap(video) {
 		var texture = new THREE.Texture(video),
