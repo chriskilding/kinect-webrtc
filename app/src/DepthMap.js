@@ -1,4 +1,4 @@
-
+/*jslint browser: true, vars: true */
 define([
     'three',
     'text!src/shaders/depthmapper.f.glsl',
