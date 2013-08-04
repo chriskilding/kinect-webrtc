@@ -6,14 +6,25 @@ define([
 ], function (THREE, Stats, DepthMap) {
     "use strict";
     
+    var addVideoStream = function(src, scene) {
+        var video = document.createElement('video');
+			video.addEventListener('loadedmetadata', function (event) {
+				var mesh = DepthMap.create(video);
+				scene.add(mesh);
+			}, false);
+            
+			video.loop = false; // true;
+			video.src = src;
+    // video.src = 'http://localhost:8080/consume/first';
+			video.play();
+    };
+    
     var start = function () {
 		var container;
 
 		var scene, camera, light, renderer, projector, ray;
 		var mouse, center;
 		var stats;
-
-		var video;
 
 		var onDocumentMouseMove = function (event) {
 			mouse.x = (event.clientX - window.innerWidth / 2) * 8;
@@ -28,7 +39,7 @@ define([
 			stats = new Stats();
 			stats.domElement.style.position = 'absolute';
 			stats.domElement.style.top = '0px';
-			// container.appendChild( stats.domElement );
+            container.appendChild( stats.domElement );
 
 			scene = new THREE.Scene();
 			center = new THREE.Vector3();
@@ -38,16 +49,7 @@ define([
 			camera.position.set(0, 0, 500);
 			scene.add(camera);
 
-			video = document.createElement('video');
-			video.addEventListener('loadedmetadata', function (event) {
-				var mesh = DepthMap.create(video);
-				scene.add(mesh);
-			}, false);
-            
-			video.loop = false; // true;
-			video.src = 'textures/kinect.webm';
-    // video.src = 'http://localhost:8080/consume/first';
-			video.play();
+			addVideoStream('textures/kinect.webm', scene);
 
 			renderer = new THREE.WebGLRenderer();
 			renderer.setSize(window.innerWidth, window.innerHeight);
