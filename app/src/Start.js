@@ -50,6 +50,12 @@ define([
 			camera.position.set(0, 0, 500);
 			scene.add(camera);
 
+            addVideoStream('textures/kinect.webm', scene, {
+                x: 0,
+                y: 0,
+                z: 0
+            });
+            
 			addVideoStream('textures/kinect.webm', scene, {
                 x: 2000,
                 y: 2000,
