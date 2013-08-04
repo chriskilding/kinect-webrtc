@@ -7,21 +7,11 @@ define([
     "use strict";
     
     var addVideoStream = function(src, scene, position) {
-        var pos = position || {
-            x: 0,
-            y: 0,
-            z: 0
-        };
-        console.log(pos);
-        
         var video = document.createElement('video');
 			video.addEventListener('loadedmetadata', function (event) {
-				var mesh = DepthMap.create(video);
-                mesh.translateX(pos.x);
-                mesh.translateY(pos.y);
-                mesh.translateZ(pos.z);
-                
-				scene.add(mesh);
+				var dmap = new DepthMap(video);
+                dmap.translate(position);
+				scene.add(dmap.mesh);
 			}, false);
             
 			video.loop = false; // true;

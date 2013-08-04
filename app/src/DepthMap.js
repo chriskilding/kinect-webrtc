@@ -5,9 +5,9 @@ define([
     'text!src/shaders/depthmapper.v.glsl'
 ], function (THREE, FragmentShader, VertexShader) {
     "use strict";
-    
-    // Note, your video must have loaded first!
-    var create = function (video) {        
+
+    // Note, your video must have loaded first!    
+    function DepthMap(video) {
 		var texture = new THREE.Texture(video),
             width = 640,
             height = 480,
@@ -45,10 +45,22 @@ define([
 			}
 		}, 1000 / 30);
         
-        return mesh;
+        // The only thing we want to keep is the mesh.
+        this.mesh = mesh;
+    }
+    
+    DepthMap.prototype.translate = function (position) {
+        var pos = position || {
+            x: 0,
+            y: 0,
+            z: 0
+        };
+        console.log(pos);
+        
+        this.mesh.translateX(pos.x);
+        this.mesh.translateY(pos.y);
+        this.mesh.translateZ(pos.z);
     };
     
-    return {
-        create: create
-    }
+    return DepthMap;
 });
