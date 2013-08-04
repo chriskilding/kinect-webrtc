@@ -6,10 +6,21 @@ define([
 ], function (THREE, Stats, DepthMap) {
     "use strict";
     
-    var addVideoStream = function(src, scene) {
+    var addVideoStream = function(src, scene, position) {
+        var pos = position || {
+            x: 0,
+            y: 0,
+            z: 0
+        };
+        console.log(pos);
+        
         var video = document.createElement('video');
 			video.addEventListener('loadedmetadata', function (event) {
 				var mesh = DepthMap.create(video);
+                mesh.translateX(pos.x);
+                mesh.translateY(pos.y);
+                mesh.translateZ(pos.z);
+                
 				scene.add(mesh);
 			}, false);
             
@@ -49,7 +60,11 @@ define([
 			camera.position.set(0, 0, 500);
 			scene.add(camera);
 
-			addVideoStream('textures/kinect.webm', scene);
+			addVideoStream('textures/kinect.webm', scene, {
+                x: 2000,
+                y: 2000,
+                z: 0
+            });
 
 			renderer = new THREE.WebGLRenderer();
 			renderer.setSize(window.innerWidth, window.innerHeight);

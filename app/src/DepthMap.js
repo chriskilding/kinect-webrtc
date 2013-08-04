@@ -7,13 +7,7 @@ define([
     "use strict";
     
     // Note, your video must have loaded first!
-    var create = function (video, position) {
-        var pos = position || {
-            x: 0,
-            y: 0,
-            z: 0
-        };
-        
+    var create = function (video) {        
 		var texture = new THREE.Texture(video),
             width = 640,
             height = 480,
@@ -44,8 +38,6 @@ define([
 		});
 
 		var mesh = new THREE.ParticleSystem(geometry, material);
-		mesh.position.x = pos.x;
-		mesh.position.y = pos.y;
 
 		setInterval(function() {
 			if (video.readyState === video.HAVE_ENOUGH_DATA) {
