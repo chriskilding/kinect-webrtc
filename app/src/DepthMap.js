@@ -21,7 +21,7 @@ define([
 			position.x = (i % width);
 			position.y = Math.floor(i / width);
 
-			geometry.vertices.push(new THREE.Vertex(position));
+			geometry.vertices.push(position);
 		}
 
 		var material = new THREE.ShaderMaterial({

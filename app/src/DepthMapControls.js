@@ -11,7 +11,7 @@ define([
     }
     
     DepthMapControls.prototype.xPosition = function (newPosition) {
-        
+        console.log(newPosition);
     };
     
     DepthMapControls.prototype.yPosition = function (newPosition) {

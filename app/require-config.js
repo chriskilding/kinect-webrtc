@@ -22,7 +22,7 @@ var require = {
     },
     paths: {
         stats: 'vendor/Stats',
-        three: 'vendor/Three',
+        three: '//cdnjs.cloudflare.com/ajax/libs/three.js/r49/Three',
         text: '//cdnjs.cloudflare.com/ajax/libs/require-text/2.0.5/text',
         dat: '//cdnjs.cloudflare.com/ajax/libs/dat-gui/0.5/dat.gui.min'
     }
