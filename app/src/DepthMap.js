@@ -8,8 +8,9 @@ define([
 
     // Model of a user's body from one OpenNI sensor.
     // Note, your video must have loaded first!    
-    function DepthMap(video) {
-		var texture = new THREE.Texture(video),
+    // Created with a factory function
+    var create = function (video) {
+        var texture = new THREE.Texture(video),
             width = 640,
             height = 480,
             nearClipping = 850,
@@ -38,30 +39,19 @@ define([
 
 		});
 
-		var mesh = new THREE.ParticleSystem(geometry, material);
-
-		setInterval(function() {
+		setInterval(function () {
 			if (video.readyState === video.HAVE_ENOUGH_DATA) {
 				texture.needsUpdate = true;
 			}
 		}, 1000 / 30);
         
-        // The only thing we want to keep is the mesh.
-        this.mesh = mesh;
-    }
-    
-    DepthMap.prototype.translate = function (position) {
-        var pos = position || {
-            x: 0,
-            y: 0,
-            z: 0
-        };
-        console.log(pos);
-        
-        this.mesh.translateX(pos.x);
-        this.mesh.translateY(pos.y);
-        this.mesh.translateZ(pos.z);
+        return new THREE.ParticleSystem(geometry, material);
     };
     
-    return DepthMap;
+    
+    
+    
+    return {
+        create: create
+    };
 });

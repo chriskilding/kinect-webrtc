@@ -2,25 +2,21 @@
 define([
     'three',
     'stats',
-    'dat',
     'src/DepthMap',
-    'src/DepthMapControls'
-], function (THREE, Stats, Dat, DepthMap, DepthMapControls) {
+    'src/GuiControls'
+], function (THREE, Stats, DepthMap, GuiControls) {
     "use strict";
     
-    var gui = new Dat.GUI();
-    var numFeeds = 0;
+    var gui = new GuiControls();
     
     var addVideoStream = function (src, scene, position) {
         var video = document.createElement('video');
         video.addEventListener('loadedmetadata', function (event) {
-            var dmap = new DepthMap(video);
-            numFeeds++;
-            var controls = new DepthMapControls(dmap, gui, numFeeds);
-            // dmap.translate(position);
-            controls.start();
+            var dmap = DepthMap.create(video);
+            console.log(dmap);
+            gui.addMesh(dmap);
             
-            scene.add(dmap.mesh);
+            scene.add(dmap);
         }, false);
         
         video.loop = false; // true;
@@ -42,7 +38,6 @@ define([
 		};
         
 		var init = function () {
-            console.log("initializing");
 			container = document.createElement('div');
 			document.body.appendChild(container);
 
