@@ -2,11 +2,12 @@
 define([
     'three',
     'stats',
-    'src/DepthMap'
-], function (THREE, Stats, DepthMap) {
+    'src/DepthMap',
+    'src/DepthMapControls'
+], function (THREE, Stats, DepthMap, DepthMapControls) {
     "use strict";
     
-    var addVideoStream = function(src, scene, position) {
+    var addVideoStream = function (src, scene, position) {
         var video = document.createElement('video');
         video.addEventListener('loadedmetadata', function (event) {
             var dmap = new DepthMap(video);

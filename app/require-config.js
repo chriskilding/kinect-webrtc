@@ -6,19 +6,24 @@
 // 'define'(['jquery']) - for example
 // it looks for a local file at js/jquery.js
 var require = {
-  shim: {
-    "three": {
-      deps: [],
-      exports: "THREE"  //attaches "THREE" to the window object
+    shim: {
+        "three": {
+            deps: [],
+            exports: "THREE"  //attaches "THREE" to the window object
+        },
+        "stats": {
+            deps: [],
+            exports: "Stats"
+        },
+        "dat": {
+            deps: [],
+            exports: "dat"
+        }
     },
-    "stats": {
-      deps: [],
-      exports: "Stats"
+    paths: {
+        stats: 'vendor/Stats',
+        three: 'vendor/Three',
+        text: '//cdnjs.cloudflare.com/ajax/libs/require-text/2.0.5/text',
+        dat: '//cdnjs.cloudflare.com/ajax/libs/dat-gui/0.5/dat.gui.min'
     }
-  },
-  paths: {
-    stats: 'vendor/Stats',
-    three: 'vendor/Three',
-    text: '//cdnjs.cloudflare.com/ajax/libs/require-text/2.0.5/text'
-  }
 };
