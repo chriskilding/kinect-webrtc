@@ -2,16 +2,24 @@
 define([
     'three',
     'stats',
+    'dat',
     'src/DepthMap',
     'src/DepthMapControls'
-], function (THREE, Stats, DepthMap, DepthMapControls) {
+], function (THREE, Stats, Dat, DepthMap, DepthMapControls) {
     "use strict";
+    
+    var gui = new Dat.GUI();
+    var numFeeds = 0;
     
     var addVideoStream = function (src, scene, position) {
         var video = document.createElement('video');
         video.addEventListener('loadedmetadata', function (event) {
             var dmap = new DepthMap(video);
-            dmap.translate(position);
+            numFeeds++;
+            var controls = new DepthMapControls(dmap, gui, numFeeds);
+            // dmap.translate(position);
+            controls.start();
+            
             scene.add(dmap.mesh);
         }, false);
         
