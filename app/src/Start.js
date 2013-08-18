@@ -21,7 +21,6 @@ define([
         
         video.loop = false; // true;
         video.src = src;
-        // video.src = 'http://localhost:8080/consume/first';
         video.play();
     };
     
@@ -54,15 +53,15 @@ define([
 			camera.position.set(0, 0, 500);
 			scene.add(camera);
 
-            addVideoStream('textures/kinect.webm', scene, {
+            /*addVideoStream('textures/kinect.webm', scene, {
                 x: 0,
                 y: 0,
                 z: 0
-            });
+            });*/
             
-			addVideoStream('textures/kinect.webm', scene, {
-                x: 2000,
-                y: 2000,
+			addVideoStream('http://131.227.68.188:8080/consume/first', scene, {
+                x: 0,
+                y: 0,
                 z: 0
             });
 
