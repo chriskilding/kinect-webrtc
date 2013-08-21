@@ -78,7 +78,7 @@ define([
             conn.vent.remoteStreamAdded.add(function (video) {
                 addVideoStream(scene, video);
             });
-            // conn.startRemoteListener();
+            conn.startRemoteListener();
 		};
 
         var render = function () {
