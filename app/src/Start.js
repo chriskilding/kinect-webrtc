@@ -25,7 +25,7 @@ define([
     };
     
     var addRtcVideoStream = function (scene) {
-        // Use partial application to bind the scene object, but not src
+        
         var video = document.createElement('video');
         conn.getLocalVideo(video);
         addVideoStream(scene, video);
@@ -60,9 +60,6 @@ define([
 			camera.position.set(0, 0, 500);
 			scene.add(camera);
             
-            // Where the video magic happens
-            addRtcVideoStream(scene);
-            
             
 			renderer = new THREE.WebGLRenderer();
 			renderer.setSize(window.innerWidth, window.innerHeight);
@@ -74,6 +71,14 @@ define([
 
 			document.addEventListener('mousemove', onDocumentMouseMove, false);
 
+            // Last things
+            // Add the local video source to the scene
+            addRtcVideoStream(scene);
+            // Rig up to add remote sources to the scene as they arrive
+            conn.vent.remoteStreamAdded.add(function (video) {
+                addVideoStream(scene, video);
+            });
+            // conn.startRemoteListener();
 		};
 
         var render = function () {

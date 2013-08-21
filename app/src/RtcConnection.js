@@ -28,6 +28,7 @@ define([
         var that = this;
         rtc.on('add remote stream', function (stream) {
             // show the remote video
+            console.log('remote stream added');
             var video = document.createElement('video');
             rtc.attachStream(stream, video);
             // Hand the video to any listeners
