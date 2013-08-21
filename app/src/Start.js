@@ -7,10 +7,18 @@ define([
 ], function (THREE, Stats, DepthMap, GuiControls) {
     "use strict";
     
+    // Set up WebRTC
+    navigator.getUserMedia = navigator.getUserMedia ||
+        navigator.webkitGetUserMedia ||
+        navigator.mozGetUserMedia ||
+        navigator.msGetUserMedia;
+    
     var gui = new GuiControls();
     
-    var addVideoStream = function (src, scene, position) {
+    var addRemoteVideoStream = function (src, scene) {
+        // Create a video
         var video = document.createElement('video');
+        
         video.addEventListener('loadedmetadata', function (event) {
             var dmap = DepthMap.create(video);
             console.log(dmap);
@@ -22,6 +30,31 @@ define([
         video.loop = false; // true;
         video.src = src;
         video.play();
+    };
+    
+    var addRtcVideoStream = function (scene) {
+        if (navigator.getUserMedia) {
+            navigator.getUserMedia(
+                {video: true},
+                function (localMediaStream) {
+                    console.log("User granted camera access");
+                    // User granted camera access - pass WebRTC video stream as URL
+                    var videoUrl = window.URL.createObjectURL(localMediaStream);
+                    // Don't worry, we can still see this function in this context
+                    addRemoteVideoStream(videoUrl, scene);
+                },
+                // Browser has WebRTC,
+                // but user denied access to camera
+                // or the system doesn't have a camera
+                function (error) {
+                    console.log("Browser supports WebRTC, but camera access was denied.", error);
+                }
+            );
+        } else {
+            // Browser doesn't support WebRTC
+            // so doesn't even have a getUserMedia function
+            console.log("Browser doesn't support WebRTC or has no getUserMedia()");
+        }
     };
     
     var start = function () {
@@ -59,11 +92,13 @@ define([
                 z: 0
             });*/
             
-			addVideoStream('http://131.227.68.188:8080/consume/first', scene, {
+			/*addRemoteVideoStream('http://131.227.68.188:8080/consume/first', scene, {
                 x: 0,
                 y: 0,
                 z: 0
-            });
+            });*/
+            
+            addRtcVideoStream(scene);
 
 			renderer = new THREE.WebGLRenderer();
 			renderer.setSize(window.innerWidth, window.innerHeight);

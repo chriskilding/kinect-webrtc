@@ -10,8 +10,18 @@ define([
     // Note, your video must have loaded first!    
     // Created with a factory function
     var create = function (video) {
-        var texture = new THREE.Texture(video),
-            width = 640,
+        var texture = new THREE.Texture(video);
+        
+        // Problem: not all video sources are power-of-2
+        // the Kinect is 640x480 by default
+        // so we have to disable mipmapping
+        // (and pay a performance penalty)
+        // TODO - can we change intrinsic video stream size in JS?
+        texture.generateMipmaps = false;
+        texture.magFilter = THREE.LinearFilter;
+        texture.minFilter = THREE.LinearFilter;
+        
+        var width = 640,
             height = 480,
             nearClipping = 850,
             farClipping = 4000,
