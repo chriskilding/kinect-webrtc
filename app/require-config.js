@@ -18,12 +18,18 @@ var require = {
         "dat": {
             deps: [],
             exports: "dat"
+        },
+        "underscore": {
+            deps: [],
+            exports: "_"
         }
     },
     paths: {
         stats: 'vendor/Stats',
         three: '//cdnjs.cloudflare.com/ajax/libs/three.js/r49/Three',
         text: '//cdnjs.cloudflare.com/ajax/libs/require-text/2.0.5/text',
-        dat: '//cdnjs.cloudflare.com/ajax/libs/dat-gui/0.5/dat.gui.min'
+        dat: '//cdnjs.cloudflare.com/ajax/libs/dat-gui/0.5/dat.gui.min',
+        underscore: '//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.1/underscore-min',
+        signals: '//cdnjs.cloudflare.com/ajax/libs/js-signals/0.8.1/js-signals.min'
     }
 };
