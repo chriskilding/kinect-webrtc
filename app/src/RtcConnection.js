@@ -6,18 +6,23 @@ define([
     "use strict";
     
     function RtcConnection() {
-        rtc.connect("ws://kate8.memset.net:8001");
+        rtc.connect("ws://localhost:8001");
         this.vent = {
             remoteStreamAdded: new Signal()
         };
     }
     
+    /**
+     * Pass in a video object if you want to render the stream locally,
+     * or pass nothing if you're just sending the stream elsewhere.
+     */
     RtcConnection.prototype.getLocalVideo = function (video) {
         rtc.createStream({"video": true}, function (stream) {
             // get local stream for manipulation
             console.log("stream", stream);
-            
-            rtc.attachStream(stream, video);
+            if (video) {
+                rtc.attachStream(stream, video);
+            }
         });
     };
     
