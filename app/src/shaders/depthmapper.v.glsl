@@ -4,7 +4,12 @@ uniform float width;
 uniform float height;
 uniform float nearClipping, farClipping;
 
+// @kcmic's shared variable for passing color
+// used in the initial color extraction from the texture map
 varying vec2 vUv;
+
+// @themasterchef's shared variable for passing computed color
+varying vec4 vertex_color;
 
 const float XtoZ = 1.11146; // tan( 1.0144686 / 2.0 ) * 2.0;
 const float YtoZ = 0.83359; // tan( 0.7898090 / 2.0 ) * 2.0;
@@ -27,7 +32,7 @@ void main() {
     //
     // So, if we want to translate our grayscale map to a blue one,
     // blue is always 1.0
-    color.b = 1.0;
+    vertex_color.b = 1.0;
     
     // then we have a scale from 0.0 to 2.0 - 16 bits - to fill
     // so first expand rawDepth to the 0-2 scale
@@ -39,12 +44,12 @@ void main() {
     
     // if we have a nearer point (> 1)
     if (processedDepth > 1.0) {
-        color.g = 1.0;
-        color.r = processedDepth - 1.0;
+        vertex_color.g = 1.0;
+        vertex_color.r = processedDepth - 1.0;
     // we have a farther point (< 1)
     } else {
-        color.g = processedDepth;
-        color.r = 0.0;
+        vertex_color.g = processedDepth;
+        vertex_color.r = 0.0;
     }
     
     // --- continue with @kcmic code ---
