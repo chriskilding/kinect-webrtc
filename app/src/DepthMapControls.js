@@ -1,6 +1,6 @@
 /*jslint browser: true, vars: true */
 define([
-    'dat'
+    "dat"
 ], function () {
     "use strict";
 
@@ -22,19 +22,19 @@ define([
         };
                 
         // Position sliders
-        this.gui.add(mesh.position, 'x').min(conf.minPosition)
+        this.gui.add(mesh.position, "x").min(conf.minPosition)
             .max(conf.maxPosition).step(conf.stepSize);
-        this.gui.add(mesh.position, 'y').min(conf.minPosition)
+        this.gui.add(mesh.position, "y").min(conf.minPosition)
             .max(conf.maxPosition).step(conf.stepSize);
-        this.gui.add(mesh.position, 'z').min(conf.minPosition)
+        this.gui.add(mesh.position, "z").min(conf.minPosition)
             .max(conf.maxPosition).step(conf.stepSize);
         
         // Rotation sliders
-        this.gui.add(mesh.rotation, 'x').min(conf.minRotation)
+        this.gui.add(mesh.rotation, "x").min(conf.minRotation)
             .max(conf.maxRotation).step(conf.stepSize);
-        this.gui.add(mesh.rotation, 'y').min(conf.minRotation)
+        this.gui.add(mesh.rotation, "y").min(conf.minRotation)
             .max(conf.maxRotation).step(conf.stepSize);
-        this.gui.add(mesh.rotation, 'z').min(conf.minRotation)
+        this.gui.add(mesh.rotation, "z").min(conf.minRotation)
             .max(conf.maxRotation).step(conf.stepSize);
     };
     

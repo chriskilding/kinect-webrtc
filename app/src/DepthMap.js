@@ -1,8 +1,8 @@
 /*jslint browser: true, vars: true */
 define([
-    'three',
-    'text!src/shaders/depthmapper.f.glsl',
-    'text!src/shaders/depthmapper.v.glsl'
+    "three",
+    "text!src/shaders/depthmapper.f.glsl",
+    "text!src/shaders/depthmapper.v.glsl"
 ], function (THREE, FragmentShader, VertexShader) {
     "use strict";
 

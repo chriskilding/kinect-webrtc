@@ -1,11 +1,11 @@
 /*jslint browser: true, vars: true */
 define([
-    'three',
-    'stats',
-    'src/DepthMap',
-    'src/GuiControls',
-    'src/RtcConnection',
-    'underscore'
+    "three",
+    "stats",
+    "src/DepthMap",
+    "src/GuiControls",
+    "src/RtcConnection",
+    "underscore"
 ], function (THREE, Stats, DepthMap, GuiControls, RtcConnection, _) {
     "use strict";
     
@@ -13,7 +13,7 @@ define([
     var conn = new RtcConnection();
     
     var addVideoStream = function (scene, video) {
-        video.addEventListener('loadedmetadata', function (event) {
+        video.addEventListener("loadedmetadata", function (event) {
             var dmap = DepthMap.create(video);
             
             gui.addMesh(dmap);
@@ -26,7 +26,7 @@ define([
     
     var addRtcVideoStream = function (scene) {
         
-        var video = document.createElement('video');
+        var video = document.createElement("video");
         conn.getLocalVideo(video);
         addVideoStream(scene, video);
     };
@@ -44,12 +44,12 @@ define([
 		};
         
 		var init = function () {
-			container = document.createElement('div');
+			container = document.createElement("div");
 			document.body.appendChild(container);
 
 			stats = new Stats();
-			stats.domElement.style.position = 'absolute';
-			stats.domElement.style.top = '0px';
+			stats.domElement.style.position = "absolute";
+			stats.domElement.style.top = "0px";
             container.appendChild(stats.domElement);
 
 			scene = new THREE.Scene();
@@ -69,7 +69,7 @@ define([
 			projector = new THREE.Projector();
 			ray = new THREE.Ray(camera.position);
 
-			document.addEventListener('mousemove', onDocumentMouseMove, false);
+			document.addEventListener("mousemove", onDocumentMouseMove, false);
 
             // Last things
             // Add the local video source to the scene

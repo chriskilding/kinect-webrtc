@@ -1,7 +1,7 @@
 /*jslint browser: true, vars: true */
 define([
-    'dat',
-    'src/DepthMapControls'
+    "dat",
+    "src/DepthMapControls"
 ], function (Dat, DepthMapControls) {
     "use strict";
 
@@ -11,7 +11,7 @@ define([
     }
     
     GuiControls.prototype.addMesh = function (mesh) {
-        var folder = this.gui.addFolder('object' + this.numFolders);
+        var folder = this.gui.addFolder("object" + this.numFolders);
         this.numFolders++;
         var dmc = new DepthMapControls(folder);
         dmc.create(mesh);
