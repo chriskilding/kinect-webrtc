@@ -6,7 +6,7 @@ define([
     "use strict";
     
     function RtcConnection() {
-        rtc.connect("ws://localhost:8001");
+        rtc.connect("ws://still-badlands-6235.herokuapp.com:8001");
         this.vent = {
             remoteStreamAdded: new Signal()
         };
