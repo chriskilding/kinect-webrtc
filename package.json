@@ -1,9 +1,8 @@
 {
-    "name": "mrdoob-kinect",
+    "name": "mindbeats2",
     "private": "true",
     "version": "0.0.1",
     "author": "Chris Kilding <mr.chris.k@gmail.com>",
-    "main": "./server",
     "dependencies": {
         "connect": "2.4.5",
         "webrtc.io": "0.0.4"
