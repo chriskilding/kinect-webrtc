@@ -1,3 +1,5 @@
+/*jslint node: true */
+
 // Barebones static asset server in Node
 // this is because require.js gets irritated when some things are served with file://
 // it prefers everything to be over http://.
@@ -9,5 +11,3 @@ var util = require('util'),
 
 connect.createServer(connect.static(__dirname)).listen(port);
 util.puts('Listening on ' + port + ', Press Ctrl + C to stop...');
-
-var webRTC = require('webrtc.io').listen(8001);

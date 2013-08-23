@@ -5,8 +5,10 @@ define([
 ], function (Signal, _) {
     "use strict";
     
-    function RtcConnection() {
-        rtc.connect("ws://still-badlands-6235.herokuapp.com:8001");
+    function RtcConnection(url) {
+        // Note, static assets come off still-badlands
+        // but the RTC server is on powerful-temple
+        rtc.connect("ws://powerful-temple-5696.herokuapp.com");
         this.vent = {
             remoteStreamAdded: new Signal()
         };
