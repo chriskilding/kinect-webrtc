@@ -7,8 +7,8 @@ define([
     
     function RtcConnection(url) {
         // Note, static assets come off still-badlands
-        // but the RTC server is on powerful-temple
-        rtc.connect("ws://powerful-temple-5696.herokuapp.com");
+        // but the RTC server is on kate8
+        rtc.connect("ws://kate8.memset.net");
         this.vent = {
             remoteStreamAdded: new Signal()
         };
