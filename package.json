@@ -4,7 +4,8 @@
     "version": "0.0.1",
     "author": "Chris Kilding <mr.chris.k@gmail.com>",
     "dependencies": {
-        "connect": "2.4.5"
+        "connect": "2.4.5",
+		"ws": "0.4.29"
     },
     "scripts": {
         "start": "node ./server"
