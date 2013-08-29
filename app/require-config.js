@@ -19,6 +19,18 @@ var require = {
             deps: [],
             exports: "dat"
         },
+        "tween": {
+            deps: [],
+            exports: "TWEEN"
+        },
+        "sparks": {
+            deps: ["three", "tween"],
+            exports: "SPARKS"
+        },
+        "threex.sparks": {
+            deps: ["three", "sparks"],
+            exports: "THREEx.Sparks"
+        },
         "underscore": {
             deps: [],
             exports: "_"
@@ -27,6 +39,9 @@ var require = {
     paths: {
         stats: 'vendor/Stats',
         three: '//cdnjs.cloudflare.com/ajax/libs/three.js/r49/Three',
+        sparks: 'vendor/Sparks',
+        tween: 'vendor/Tween',
+        'threex.sparks': 'vendor/THREEx.Sparks',
         text: '//cdnjs.cloudflare.com/ajax/libs/require-text/2.0.5/text',
         dat: '//cdnjs.cloudflare.com/ajax/libs/dat-gui/0.5/dat.gui.min',
         underscore: '//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.1/underscore-min',
