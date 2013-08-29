@@ -40,7 +40,7 @@ define([
         var bcaster = new Mocap.Broadcaster();
 
         // SSE data source, with custom URL
-        var source = new Mocap.ServerSentEventsSource(bcaster, "http://localhost:80/skeleton");
+        var source = new Mocap.ServerSentEventsSource(bcaster, "http://localhost:2000/skeleton");
         
         source.start();
         

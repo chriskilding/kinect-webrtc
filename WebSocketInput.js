@@ -9,7 +9,7 @@ function WebSocketInput(port) {
     console.log("Starting WebSocket relay server on port", port);
     this.wss = new WebSocketServer({port: port});
     this.vent = {
-        skeletonReceived: new signals.Signal()
+        skeleton: new signals.Signal()
     };
 }
 
@@ -19,7 +19,7 @@ WebSocketInput.prototype.start = function () {
     
         ws.on('message', _.bind(function (message) {
             console.log('message', message);
-            this.vent.skeletonReceived.dispatch(message);
+            this.vent.skeleton.dispatch(message);
         }, this));
     }, this));
 };

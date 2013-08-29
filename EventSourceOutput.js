@@ -25,7 +25,7 @@ EventSourceOutput.prototype.start = function (app) {
             res.write("data: " + msg + '\n\n');
         };
         
-        this.vent.skeletonReceived.add(socketWrite);
+        this.vent.skeleton.add(socketWrite);
         
         //send headers for event-stream connection
         res.writeHead(200, {
@@ -38,7 +38,7 @@ EventSourceOutput.prototype.start = function (app) {
         // The 'close' event is fired when a user closes their browser window.
         // In that situation we want to make sure we stop sending skeleton readings
         req.on("close", _.bind(function () {
-            this.vent.skeletonReceived.remove(socketWrite);
+            this.vent.skeleton.remove(socketWrite);
         }, this));
     }, this));
 };
