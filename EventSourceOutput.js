@@ -2,6 +2,7 @@
 "use strict";
 
 var signals = require('signals');
+var _ = require("underscore");
 
 function EventSourceOutput() {
     this.vent = {
@@ -13,7 +14,7 @@ EventSourceOutput.prototype.start = function (app) {
     console.log("starting EventSource server");
     
     // EventSource endpoint for streaming skeleton data
-    app.get('/skeleton', function (req, res) {
+    app.get('/skeleton', _.bind(function (req, res) {
         // let request last as long as possible
         req.socket.setTimeout(Infinity);
         
@@ -33,10 +34,10 @@ EventSourceOutput.prototype.start = function (app) {
         
         // The 'close' event is fired when a user closes their browser window.
         // In that situation we want to make sure we stop sending skeleton readings
-        req.on("close", function () {
+        req.on("close", _.bind(function () {
             this.vent.skeletonReceived.remove(socketWrite);
-        });
-    });
+        }, this));
+    }, this));
 };
 
 module.exports = EventSourceOutput;

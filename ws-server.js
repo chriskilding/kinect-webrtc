@@ -13,7 +13,7 @@ var app = express(80);
 });*/
 
 
-var wsInput = new WebSocketInput(8080);
+var wsInput = new WebSocketInput(3000);
 wsInput.start();
 
 var esOutput = new EventSourceOutput();

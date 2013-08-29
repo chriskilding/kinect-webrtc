@@ -3,6 +3,7 @@
 
 var WebSocketServer = require('ws').Server;
 var signals = require("signals");
+var _ = require("underscore");
 
 function WebSocketInput(port) {
     console.log("Starting WebSocket relay server on port", port);
@@ -13,14 +14,14 @@ function WebSocketInput(port) {
 }
 
 WebSocketInput.prototype.start = function () {
-    this.wss.on('connection', function (ws) {
+    this.wss.on('connection', _.bind(function (ws) {
         console.log("client connected");
     
-        ws.on('message', function (message) {
+        ws.on('message', _.bind(function (message) {
             console.log('message', message);
             this.vent.skeletonReceived.dispatch(message);
-        });
-    });
+        }, this));
+    }, this));
 };
 
 module.exports = WebSocketInput;
