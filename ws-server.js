@@ -1,19 +1,25 @@
 /*jslint node: true */
 "use strict";
 
-var WebSocketServer = require('ws').Server;
+var express = require('express');
+var WebSocketInput = require('./WebSocketInput');
+var EventSourceOutput = require('./EventSourceOutput');
 
-var port = process.env.PORT || 443;
-console.log("Starting WebSocket relay server on port", port);
+// Lets us share an instance of express on port 80
+var app = express(80);
 
-var wss = new WebSocketServer({port: port});
+/*app.get('/', function (req, res) {
+    res.render('index');
+});*/
 
-console.log("starting WS server");
 
-wss.on('connection', function (ws) {
-	console.log("client connected");
+var wsInput = new WebSocketInput(8080);
+wsInput.start();
 
-    ws.on('message', function (message) {
-        console.log('message', message);
-    });
+var esOutput = new EventSourceOutput();
+esOutput.start(app);
+
+// Bridge input to output
+wsInput.vent.skeletonReceived.add(function (data) {
+    esOutput.vent.skeleton.dispatch(data);
 });
