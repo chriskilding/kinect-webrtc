@@ -18,7 +18,7 @@ EventSourceOutput.prototype.start = function (app) {
         // let request last as long as possible
         req.socket.setTimeout(Infinity);
         
-        var socketWrite = function (msg) {
+        var socketWrite = function (msg) {            
             // Note the extra newline
             // AND that you MUST prefix the message with the "data: " bit
             // for EventSource listeners to work properly client side

@@ -18,8 +18,8 @@ WebSocketInput.prototype.start = function () {
         console.log("client connected");
     
         ws.on('message', _.bind(function (message) {
-            console.log('message', message);
-            this.vent.skeleton.dispatch(message);
+            // Remember, message is not necessarily JSON!
+            this.vent.skeleton.dispatch(JSON.stringify(JSON.parse(message)));
         }, this));
     }, this));
 };
