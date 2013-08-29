@@ -1,7 +1,7 @@
 /*jslint node: true */
 
 var WebSocketServer = require('ws').Server;
-var wss = new WebSocketServer({port: 8080});
+var wss = new WebSocketServer({port: 443});
 
 console.log("starting WS server");
 
