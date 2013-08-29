@@ -1,6 +1,6 @@
 /*jslint browser: true, vars: true */
 define([
-    "signals",
+    "js-signals",
     "underscore"
 ], function (Signal, _) {
     "use strict";
