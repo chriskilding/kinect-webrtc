@@ -4,8 +4,9 @@ define([
     "src/GuiControls",
     "src/RtcConnection",
     "src/World",
-    "underscore"
-], function (DepthMap, GuiControls, RtcConnection, World, _) {
+    "underscore",
+    "mocap"
+], function (DepthMap, GuiControls, RtcConnection, World, _, Mocap) {
     "use strict";
     
     var gui = new GuiControls();
@@ -31,8 +32,17 @@ define([
     };
     
     var start = function () {
+        // Set up the 3D world
         var world = new World();
         
+        // Wire up our skeleton data source
+        // Always need a...
+        var bcaster = new Mocap.Broadcaster();
+
+        // SSE data source, with custom URL
+        var source = new Mocap.ServerSentEventsSource(bcaster, "http://localhost:80/skeleton");
+        
+        source.start();
         
         // Last things
         // Add the local video source to the scene
