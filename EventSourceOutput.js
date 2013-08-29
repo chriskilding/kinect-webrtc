@@ -19,7 +19,10 @@ EventSourceOutput.prototype.start = function (app) {
         req.socket.setTimeout(Infinity);
         
         var socketWrite = function (msg) {
-            res.write(msg + '\n\n'); // Note the extra newline
+            // Note the extra newline
+            // AND that you MUST prefix the message with the "data: " bit
+            // for EventSource listeners to work properly client side
+            res.write("data: " + msg + '\n\n');
         };
         
         this.vent.skeletonReceived.add(socketWrite);
