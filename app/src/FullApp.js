@@ -40,6 +40,9 @@ define([
         var bcaster = new Mocap.Broadcaster();
 
         // SSE data source, with custom URL
+        // WARNING: mocap data is *usually* JSON
+        // but an SSE server can just send any old string if it wants
+        // so ensure the server is, in fact, outputting JSON strings
         var source = new Mocap.ServerSentEventsSource(bcaster, "http://localhost:2000/skeleton");
         
         source.start();
