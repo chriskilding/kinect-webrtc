@@ -33,7 +33,7 @@ wsInput.vent.skeleton.add(function (data) {
 });
 
 // Tell express to listen on a port
-app.listen(ports.outputSkeleton);
+app.listen(ports.outputSkeleton, "77.73.3.27");
 
 // Open static assets server
 connect.createServer(connect.static(__dirname)).listen(ports.assets);
