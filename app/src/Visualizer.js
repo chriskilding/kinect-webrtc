@@ -74,8 +74,6 @@ define([
     };
         
     Visualizer.prototype.start = function () {
-        this.addSkeleton("http://kate8.memset.net:2000/skeleton");
-
         this.world.start();
     };
     

@@ -18,11 +18,14 @@ define([
 
         this.viz.start();
         
+        // Add a skeleton
+        this.viz.addSkeleton("http://kate8.memset.net:2000/skeleton", calibData.skeleton);
+        
         // Last things
         // Add the local video source to the scene
         var video = document.createElement("video");
         this.conn.getLocalVideo(video);
-        this.viz.addVideoStream(video);
+        this.viz.addVideoStream(video, calibData.localDepth);
         
         // Rig up to add remote sources to the scene as they arrive
         this.conn.vent.remoteStreamAdded.add(_.bind(function (video) {
