@@ -1,5 +1,5 @@
 {
-    "local": {
+    "localDepth": {
         "posX": 0,
         "psoY": 0,
         "posZ": 0,
@@ -7,12 +7,21 @@
         "rotY": 0,
         "rotZ": 0
     },
-    "remote": {
+    "remoteDepth": {
         "posX": 0,
         "psoY": -108,
         "posZ": -3050,
         "rotX": 0,
         "rotY": 3,
         "rotZ": 0        
+    },
+    "skeleton": {
+        "posX": 0,
+        "psoY": 0,
+        "posZ": -4000,
+        "rotX": 0,
+        "rotY": 0,
+        "rotZ": 0
     }
+    
 }

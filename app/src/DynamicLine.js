@@ -5,12 +5,12 @@ define([
     'three',
     'sparks',
     'threex.sparks',
-    'graphics/QuaternionCalculator',
+    'src/QuaternionCalculator',
     'underscore'
 ], function (THREE, SPARKS, THREExSparks, QuaternionCalculator, _) {
     'use strict';
 
-    function DynamicLine(engine, options) {
+    function DynamicLine(scene, options) {
         var opts = options || {};
         /*
         * Dynamic geometry is hard!
@@ -80,9 +80,10 @@ define([
         // start the emitter
         this.sparker.emitter().start();
         // add the container to THREE.scene
-        engine.addObject(this.sparker.container(), _.bind(function () {
-            this.onRender();
-        }, this));
+        this.scene.add(this.sparker.container());
+        
+        // Start frame updates
+        this.startAnimation();
     }
   
     DynamicLine.prototype.setParticleSize = function (diameter) {
@@ -152,10 +153,17 @@ define([
         this.currentHSV = [h, s, v];
     };
     
-    DynamicLine.prototype.onRender = function () {
-        if (this.sparker) {
-            this.sparker.update();
-        }
+    DynamicLine.prototype.startAnimation = function () {
+        var animate = _.bind(function () {
+            if (this.sparker) {
+                this.sparker.update();
+            }
+            
+            // Tail recursion
+            window.requestAnimationFrame(animate);
+        }, this);
+        
+        animate();
     };
 
     return DynamicLine;

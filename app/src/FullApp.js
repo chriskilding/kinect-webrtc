@@ -2,9 +2,12 @@
 define([
     "src/RtcConnection",
     "underscore",
-    "src/Visualizer"
-], function (RtcConnection, _, Visualizer) {
+    "src/Visualizer",
+    "text!calibration.json"
+], function (RtcConnection, _, Visualizer, calibrationData) {
     "use strict";
+    
+    var calibData = JSON.parse(calibrationData);
     
     function FullApp() {
         this.conn = new RtcConnection();
