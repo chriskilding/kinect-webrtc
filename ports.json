@@ -1,0 +1,6 @@
+{
+    "webrtc": 5000,
+    "assets": 8000,
+    "inputSkeleton": 3000,
+    "outputSkeleton": 2000
+}
