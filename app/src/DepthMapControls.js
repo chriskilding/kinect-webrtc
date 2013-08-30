@@ -13,8 +13,8 @@ define([
     // Controls for the depth map positioning
     DepthMapControls.prototype.create = function (mesh, config) {
         var conf = config || {
-            minPosition: -2000,
-            maxPosition: 2000,
+            minPosition: -5000,
+            maxPosition: 5000,
             minRotation: 0,
             // NOTE rotation is in RADIANS. 2 pi rads = 360 degrees
             maxRotation: 2 * Math.PI,

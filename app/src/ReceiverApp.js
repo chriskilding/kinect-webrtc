@@ -21,6 +21,7 @@ define([
         
         // Rig up to add remote sources to the scene as they arrive
         this.conn.vent.remoteStreamAdded.add(_.bind(function (video) {
+            console.log("remoteStreamAdded callback", video);
             this.viz.addVideoStream(video);
         }, this));
         
