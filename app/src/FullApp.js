@@ -3,8 +3,9 @@ define([
     "src/RtcConnection",
     "underscore",
     "src/Visualizer",
+    "mocap",
     "text!calibration.json"
-], function (RtcConnection, _, Visualizer, calibrationData) {
+], function (RtcConnection, _, Visualizer, Mocap, calibrationData) {
     "use strict";
     
     var calibData = JSON.parse(calibrationData);
@@ -18,8 +19,12 @@ define([
 
         this.viz.start();
         
-        // Add a skeleton
+        // Add a skeleton and calibrate it
         this.viz.addSkeleton("http://kate8.memset.net:2000/skeleton", calibData.skeleton);
+        
+        // Trace right hand - uses same calibration data as skeleton
+        this.viz.addTraceForm(Mocap.Joints.RightHand, calibData.skeleton);
+
         
         // Last things
         // Add the local video source to the scene

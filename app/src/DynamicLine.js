@@ -28,7 +28,7 @@ define([
         * when we have finished with them.
         */
         
-        this.setParticleSize(opts.particleSize || 30);
+        this.setParticleSize(opts.particleSize || 300);
         
         this.particleAcceleration = opts.particleAcceleration || new SPARKS.Accelerate(0, -0.1, 0);
         
@@ -58,15 +58,20 @@ define([
             this.setDrift(0.2, 0, 0.2);
         }
         
-        var initColorSize = _.bind(function () {
+        // A rare occasion where the 'that' trick
+        // is a bit easier than _.bind
+        var that = this;
+        // Look, a constructor function!
+        // "this" is now an InitColorSize instance
+        var InitColorSize = function () {
             this.initialize = function (emitter, particle) {
-                particle.target.color().setHSV(this.currentHSV[0], this.currentHSV[1], this.currentHSV[2]);
-                particle.target.size(this.particleSize);
+                particle.target.color().setHSL(that.currentHSV[0], that.currentHSV[1], that.currentHSV[2]);
+                particle.target.size(that.particleSize);
             };
-        }, this);
+        };
         
         // Other bits
-        emitter.addInitializer(new initColorSize());
+        emitter.addInitializer(new InitColorSize());
         emitter.addInitializer(new SPARKS.Position(new SPARKS.PointZone(this.currentPosition)));
         // No randomness, all particles have the same TTL
         emitter.addInitializer(new SPARKS.Lifetime(this.timeToLive));
