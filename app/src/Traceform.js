@@ -8,9 +8,9 @@ define([
 ], function (DynamicLine, Kinematics, Mocap) {
     'use strict';
     
-    function Traceform(scene) {
+    function Traceform() {
         // The trace to draw
-        this.line = new DynamicLine(scene);
+        this.line = new DynamicLine();
         
         // Derives a metric for Laban "quick" and "sustained"
         this.speedStat = new Kinematics.RunningSpeedStat();
@@ -21,7 +21,7 @@ define([
         // Derives a metric for Laban "strong" and "light"
         this.forceStat = new Kinematics.RunningImpactStat();
         
-        this.geometryRecorder = new Mocap.DataRecorder();
+        // this.geometryRecorder = new Mocap.DataRecorder();
     }
   
     Traceform.prototype.update = function (data) {
@@ -38,25 +38,7 @@ define([
         this.line.setRotation(data.rotation);
         this.line.setColor(Math.random(), Math.random(), Math.random());
         
-        this.geometryRecorder.update(data.position);
-    };
-  
-    Traceform.prototype.startRecording = function () {
-        this.geometryRecorder.start();
-    };
-  
-    // Convert the individual points into one finished geometry
-    // now that the last movement is complete.
-    Traceform.prototype.stopRecording = function () {
-        this.geometryRecorder.stop();
-        
-        console.log("compressing dynamic geometry");
-        
-        var completedGeometry = this.geometryRecorder.getHistory();
-        this.staticLine.addLine(completedGeometry);
-        
-        // Clear history!
-        this.geometryRecorder.clear();
+        // this.geometryRecorder.update(data.position);
     };
   
     return Traceform;

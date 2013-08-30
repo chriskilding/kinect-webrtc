@@ -10,7 +10,7 @@ define([
 ], function (THREE, SPARKS, THREExSparks, QuaternionCalculator, _) {
     'use strict';
 
-    function DynamicLine(scene, options) {
+    function DynamicLine(options) {
         var opts = options || {};
         /*
         * Dynamic geometry is hard!
@@ -79,8 +79,9 @@ define([
         
         // start the emitter
         this.sparker.emitter().start();
-        // add the container to THREE.scene
-        this.scene.add(this.sparker.container());
+        
+        // the container is what has to be added to THREE.scene
+        this.threeObject = this.sparker.container();
         
         // Start frame updates
         this.startAnimation();

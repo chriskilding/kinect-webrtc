@@ -19,8 +19,8 @@ define([
         
         // Wire up our skeleton data source
         this.bcaster = new Mocap.Broadcaster();
-        
     }
+    
     Visualizer.prototype.addVideoStream = function (video, calibrationData) {
         video.addEventListener("loadedmetadata", _.bind(function (event) {
             var dmap = DepthMap.create(video);
@@ -38,12 +38,29 @@ define([
         video.play();
     };
     
-    Visualizer.prototype.addTraceForm = function () {
-        var tf = new Traceform(this.world.scene);
-        this.jUpdater.vent.joint.add(tf.update, tf);
-        //this.jSteady.vent.steady.add(tf.freeze, tf);
-        this.gui.add(tf, 'startRecording');
-        this.gui.add(tf, 'stopRecording');
+    Visualizer.prototype.addTraceForm = function (mocapJoint, calibrationData) {
+        // the data filter
+        var jUpdater = new Mocap.JointUpdater(mocapJoint, this.bcaster);
+        // alert when steady
+        // this.jSteady = new JointSteadyDetector();
+        // glue them together
+        // this.jUpdater.vent.joint.add(this.jSteady.update, this.jSteady);
+        
+        // the geometry
+        var tf = new Traceform();
+        
+        if (calibrationData) {
+            Calibrator.calibrateObject(tf.line.threeObject, calibrationData);
+        }
+        
+        // Add to the scene
+        this.world.scene.add(tf.line.threeObject);
+        
+        // Add to the Gui
+        console.log("traceform", tf);
+        this.gui.addMesh(tf.line.threeObject);
+                                       
+        jUpdater.vent.joint.add(tf.update, tf);
     };
         
     Visualizer.prototype.addSkeleton = function (uri, calibrationData) {
