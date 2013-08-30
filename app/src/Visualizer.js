@@ -44,7 +44,7 @@ define([
         this.world.scene.add(skeleton.skeletonPoints);
         // Add to the Gui
         console.log(skeleton);
-        // gui.addMesh(skeleton);
+        this.gui.addMesh(skeleton.skeletonPoints);
         
         // move the whole skeleton avatar - no rate limiting
         this.bcaster.vent.skeleton.add(skeleton.update, skeleton);
