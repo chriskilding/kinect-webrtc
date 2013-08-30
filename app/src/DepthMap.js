@@ -37,7 +37,7 @@ define([
 
 		var material = new THREE.ShaderMaterial({
 			uniforms: {
-				"uTex": {
+				"map": {
                     type: 't',
                     value: texture
                 },
