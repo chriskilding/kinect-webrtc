@@ -11,6 +11,8 @@ define([
     // Created with a factory function
     var create = function (video) {
         var texture = new THREE.Texture(video);
+        // quick workaround to get it the right way up (since r50)
+        texture.flipY = false;
         
         // Problem: not all video sources are power-of-2
         // the Kinect is 640x480 by default
