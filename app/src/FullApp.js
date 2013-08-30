@@ -29,7 +29,7 @@ define([
         
         // Rig up to add remote sources to the scene as they arrive
         this.conn.vent.remoteStreamAdded.add(_.bind(function (video) {
-            this.viz.addVideoStream(video);
+            this.viz.addVideoStream(video, calibData.remoteDepth);
         }, this));
         
         this.conn.startRemoteListener();
