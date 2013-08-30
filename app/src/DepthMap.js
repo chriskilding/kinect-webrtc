@@ -37,7 +37,7 @@ define([
 
 		var material = new THREE.ShaderMaterial({
 			uniforms: {
-				"texture": {
+				"uTex": {
                     type: 't',
                     value: texture
                 },
@@ -45,9 +45,9 @@ define([
 				"height": { type: "f", value: height },
 				"nearClipping": { type: "f", value: nearClipping },
 				"farClipping": { type: "f", value: farClipping }
-			}/*,
+			},
 			vertexShader: VertexShader,
-			fragmentShader: FragmentShader*/
+			fragmentShader: FragmentShader
 		});
 
 		setInterval(function () {
