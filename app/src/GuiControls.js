@@ -13,8 +13,8 @@ define([
     GuiControls.prototype.addMesh = function (mesh) {
         var folder = this.gui.addFolder("object" + this.numFolders);
         this.numFolders++;
-        var dmc = new DepthMapControls(folder);
-        dmc.create(mesh);
+        var dmc = new DepthMapControls(folder, mesh);
+        dmc.create();
     };
     
     return GuiControls;
