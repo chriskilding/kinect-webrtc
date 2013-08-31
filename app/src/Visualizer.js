@@ -66,7 +66,7 @@ define([
         
         jUpdater.vent.joint.add(tf.update, tf);
         
-        tf.start();
+        // The Gui handles starting and stopping the trace form
     };
         
     Visualizer.prototype.addSkeleton = function (uri, calibrationData) {
