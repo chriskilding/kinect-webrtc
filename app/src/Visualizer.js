@@ -7,8 +7,9 @@ define([
     "mocap",
     "src/Skeleton",
     "src/Traceform",
-    "src/Calibrator"
-], function (DepthMap, GuiControls, World, _, Mocap, Skeleton, Traceform, Calibrator) {
+    "src/Calibrator",
+    "three"
+], function (DepthMap, GuiControls, World, _, Mocap, Skeleton, Traceform, Calibrator, THREE) {
     "use strict";
     
     function Visualizer() {
@@ -51,6 +52,10 @@ define([
         
         if (calibrationData) {
             Calibrator.calibrateObject(tf.line.threeObject, calibrationData);
+            // For some reason the traceform moves correctly with the depth map
+            // but is flipped so that if depthmap moves right, traceform moves left
+            // adjusting the scale property fixes that
+            tf.line.threeObject.scale.setX(-1);
         }
         
         // Add to the scene
@@ -77,6 +82,10 @@ define([
         // Apply calibration
         if (calibrationData) {
             Calibrator.calibrateObject(skeleton.skeletonPoints, calibrationData);
+            // For some reason the skeleton moves correctly with the depth map
+            // but is flipped so that if depthmap moves right, skeleton moves left
+            // adjusting the scale property fixes that
+            skeleton.skeletonPoints.scale.setX(-1);
         }
         
         this.world.scene.add(skeleton.skeletonPoints);
