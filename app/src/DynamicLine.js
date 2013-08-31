@@ -29,7 +29,7 @@ define([
         
         this.setParticleSize(opts.particleSize || 300);
         
-        this.particleAcceleration = opts.particleAcceleration || new SPARKS.Accelerate(0, -20, 0);
+        this.particleAcceleration = opts.particleAcceleration || new SPARKS.Accelerate(0, -0.1, 0);
         
         this.spawnRate = opts.spawnRate || 450;
         
@@ -72,7 +72,7 @@ define([
         emitter.addInitializer(new SPARKS.Position(new SPARKS.PointZone(this.currentPosition)));
         // No randomness, all particles have the same TTL
         emitter.addInitializer(new SPARKS.Lifetime(this.timeToLive));
-        emitter.addInitializer(new SPARKS.Velocity(new SPARKS.PointZone(this.currentRotation)));
+        // emitter.addInitializer(new SPARKS.Velocity(new SPARKS.PointZone(this.currentRotation)));
         
         emitter.addAction(new SPARKS.Age());
         emitter.addAction(new SPARKS.Move());
