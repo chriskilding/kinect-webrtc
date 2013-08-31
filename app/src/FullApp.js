@@ -4,7 +4,7 @@ define([
     "underscore",
     "src/Visualizer",
     "mocap",
-    "text!threeKinectCalibration.json"
+    "text!twoKinectCalibration.json"
 ], function (RtcConnection, _, Visualizer, Mocap, calibrationData) {
     "use strict";
     
@@ -33,26 +33,9 @@ define([
         this.viz.addVideoStream(video, calibData.localDepth);
         
         // Rig up to add remote sources to the scene as they arrive
-        // with 3 Kinects, this gets interesting...
-        // which remote source will be first?
-        // we must make an assumption...
-        var orderedCalibration = [
-            calibData.remoteDepthLeft,
-            calibData.remoteDepthRight
-        ];
-        var sensorsConnected = 0;
-        
         this.conn.vent.remoteStreamAdded.add(_.bind(function (video) {
-            
-            if (sensorsConnected < orderedCalibration.length) {
-                // Add stream with precomputed calibration data
-                this.viz.addVideoStream(video, orderedCalibration[sensorsConnected]);
-            } else {
-                // Just add the stream as is
-                this.viz.addVideoStream(video);
-            }
-            
-            ++sensorsConnected;
+            // Add stream with precomputed calibration data
+            this.viz.addVideoStream(video, calibData.remoteDepth);
         }, this));
         
         this.conn.startRemoteListener();
