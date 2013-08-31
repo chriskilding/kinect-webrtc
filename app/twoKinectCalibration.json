@@ -12,7 +12,7 @@
         "posY": -108,
         "posZ": -3050,
         "rotX": 0,
-        "rotY": 3,
+        "rotY": 3.14,
         "rotZ": 0        
     },
     "skeleton": {
