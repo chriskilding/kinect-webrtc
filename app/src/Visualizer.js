@@ -62,8 +62,7 @@ define([
         this.world.scene.add(tf.line.threeObject);
         
         // Add to the Gui
-        console.log("traceform", tf);
-        this.gui.addMesh(tf.line.threeObject);
+        this.gui.addTraceform(tf, mocapJoint);
         
         jUpdater.vent.joint.add(tf.update, tf);
         
