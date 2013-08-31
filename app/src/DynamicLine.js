@@ -84,6 +84,8 @@ define([
         
         // the container is what has to be added to THREE.scene
         this.threeObject = this.sparker.container();
+        // save GPU cycles by not rendering it at this time
+        this.threeObject.visible = false;
     }
   
     DynamicLine.prototype.start = function () {
@@ -92,12 +94,16 @@ define([
         this.sparker.emitter().start();
         // Start frame updates
         this.startAnimation();
+        // tell the scene to render it
+        this.threeObject.visible = true;
     };
     
     DynamicLine.prototype.stop = function () {
         this.isRunning = false;
         // start the emitter
         this.sparker.emitter().stop();
+        // disable rendering
+        this.threeObject.visible = false;
     };
     
     DynamicLine.prototype.setParticleSize = function (diameter) {
