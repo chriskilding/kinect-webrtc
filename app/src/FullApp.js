@@ -23,7 +23,7 @@ define([
         this.viz.addSkeleton("http://kate8.memset.net:2000/skeleton", calibData.skeleton);
         
         // Trace right hand - uses same calibration data as skeleton
-        // this.viz.addTraceForm(Mocap.Joints.RightHand, calibData.skeleton);
+        this.viz.addTraceForm(Mocap.Joints.RightHand, calibData.skeleton);
 
         
         // Last things

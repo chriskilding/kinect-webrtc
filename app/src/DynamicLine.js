@@ -5,9 +5,8 @@ define([
     'three',
     'sparks',
     'threex.sparks',
-    'src/QuaternionCalculator',
     'underscore'
-], function (THREE, SPARKS, THREExSparks, QuaternionCalculator, _) {
+], function (THREE, SPARKS, THREExSparks, _) {
     'use strict';
 
     function DynamicLine(options) {
@@ -37,8 +36,6 @@ define([
         this.timeToLive = opts.timeToLive || 10;
         
         this.setBufferSize(opts.bufferSize || 2000);
-            
-        this.calculator = new QuaternionCalculator();
         
         this.sparker = new THREExSparks({
             maxParticles: this.bufferSize,
@@ -151,8 +148,12 @@ define([
         this.currentPosition.set(x, y, z);
     };
   
-    DynamicLine.prototype.setRotation = function (matrix) {
-        this.currentRotation.applyQuaternion(this.calculator.quaternionFromMatrix(matrix));
+    DynamicLine.prototype.setRotation = function (r) {
+        this.currentRotation.applyMatrix3(new THREE.Matrix3(
+            r[0], r[1], r[2],
+            r[3], r[4], r[5],
+            r[6], r[7], r[8]
+        ));
     };
   
     DynamicLine.prototype.setColor = function (h, s, v) {
