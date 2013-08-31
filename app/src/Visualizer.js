@@ -64,8 +64,10 @@ define([
         // Add to the Gui
         console.log("traceform", tf);
         this.gui.addMesh(tf.line.threeObject);
-                                       
+        
         jUpdater.vent.joint.add(tf.update, tf);
+        
+        tf.start();
     };
         
     Visualizer.prototype.addSkeleton = function (uri, calibrationData) {

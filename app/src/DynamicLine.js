@@ -79,16 +79,27 @@ define([
         //emitter.addAction(this.randomDrift);
         emitter.addAction(this.particleAcceleration);
         
-        // start the emitter
-        this.sparker.emitter().start();
+        // Are we running
+        this.isRunning = false;
         
         // the container is what has to be added to THREE.scene
         this.threeObject = this.sparker.container();
-        
-        // Start frame updates
-        this.startAnimation();
     }
   
+    DynamicLine.prototype.start = function () {
+        this.isRunning = true;
+        // start the emitter
+        this.sparker.emitter().start();
+        // Start frame updates
+        this.startAnimation();
+    };
+    
+    DynamicLine.prototype.stop = function () {
+        this.isRunning = false;
+        // start the emitter
+        this.sparker.emitter().stop();
+    };
+    
     DynamicLine.prototype.setParticleSize = function (diameter) {
         if (diameter > 0) {
             this.particleSize = diameter;
@@ -167,7 +178,9 @@ define([
             }
             
             // Tail recursion
-            window.requestAnimationFrame(animate);
+            if (this.isRunning) {
+                window.requestAnimationFrame(animate);
+            }
         }, this);
         
         animate();

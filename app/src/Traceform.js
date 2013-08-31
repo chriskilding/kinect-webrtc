@@ -24,6 +24,14 @@ define([
         // this.geometryRecorder = new Mocap.DataRecorder();
     }
   
+    Traceform.prototype.start = function () {
+        this.line.start();
+    };
+    
+    Traceform.prototype.stop = function () {
+        this.line.stop();
+    };
+    
     Traceform.prototype.update = function (data) {
         // Update the quickness metric
         this.speedStat.push(data.position);
