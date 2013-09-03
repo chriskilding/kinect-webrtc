@@ -26,8 +26,8 @@ define([
         // ideally, don't use feet - they are too low for the Kinects to see!
         this.viz.addTraceForm(Mocap.Joints.RightHand, calibData.skeleton);
         this.viz.addTraceForm(Mocap.Joints.LeftHand, calibData.skeleton);
-        // this.viz.addTraceForm(Mocap.Joints.RightKnee, calibData.skeleton);
-        // this.viz.addTraceForm(Mocap.Joints.LeftKnee, calibData.skeleton);
+        this.viz.addTraceForm(Mocap.Joints.RightKnee, calibData.skeleton);
+        this.viz.addTraceForm(Mocap.Joints.LeftKnee, calibData.skeleton);
         this.viz.addTraceForm(Mocap.Joints.RightShoulder, calibData.skeleton);
         this.viz.addTraceForm(Mocap.Joints.LeftShoulder, calibData.skeleton);
         this.viz.addTraceForm(Mocap.Joints.Head, calibData.skeleton);
