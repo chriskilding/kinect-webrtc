@@ -11,6 +11,8 @@ define([
     // Created with a factory function
     var create = function (video) {
         var texture = new THREE.Texture(video);
+        // quick workaround to get it the right way up (since r50)
+        texture.flipY = false;
         
         // Problem: not all video sources are power-of-2
         // the Kinect is 640x480 by default
@@ -37,16 +39,17 @@ define([
 
 		var material = new THREE.ShaderMaterial({
 			uniforms: {
-				"map": { type: "t", value: 0, texture: texture },
+				"map": {
+                    type: 't',
+                    value: texture
+                },
 				"width": { type: "f", value: width },
 				"height": { type: "f", value: height },
 				"nearClipping": { type: "f", value: nearClipping },
 				"farClipping": { type: "f", value: farClipping }
 			},
 			vertexShader: VertexShader,
-			fragmentShader: FragmentShader,
-			depthWrite: false
-
+			fragmentShader: FragmentShader
 		});
 
 		setInterval(function () {

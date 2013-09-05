@@ -38,7 +38,7 @@ var require = {
     },
     paths: {
         stats: 'vendor/Stats',
-        three: '//cdnjs.cloudflare.com/ajax/libs/three.js/r49/Three',
+        three: '//cdnjs.cloudflare.com/ajax/libs/three.js/r58/three',
         sparks: 'vendor/Sparks',
         tween: 'vendor/Tween',
         'threex.sparks': 'vendor/THREEx.Sparks',
@@ -47,6 +47,7 @@ var require = {
         underscore: '//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.1/underscore-min',
         'js-signals': '//cdnjs.cloudflare.com/ajax/libs/js-signals/0.8.1/js-signals.min',
         socketio: '//cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.16/socket.io.min',
-        mocap: 'vendor/mocap'
+        mocap: 'vendor/mocap',
+        realtimekinematics: 'vendor/realtimekinematics'
     }
 };

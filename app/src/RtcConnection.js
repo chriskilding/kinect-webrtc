@@ -6,9 +6,7 @@ define([
     "use strict";
     
     function RtcConnection(url) {
-        // Note, static assets come off still-badlands
-        // but the RTC server is on kate8
-        rtc.connect("ws://kate8.memset.net");
+        rtc.connect("ws://kate8.memset.net:5000");
         this.vent = {
             remoteStreamAdded: new Signal()
         };

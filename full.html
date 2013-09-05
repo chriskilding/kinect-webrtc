@@ -22,8 +22,8 @@
             // this is the read-only viewer instead of FullApp
             require([
                 'src/FullApp'
-            ], function (app) {  
-                app.start();
+            ], function (App) {  
+                new App().start();
             });
         </script>
         <style>

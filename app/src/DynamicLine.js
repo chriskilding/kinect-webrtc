@@ -5,12 +5,11 @@ define([
     'three',
     'sparks',
     'threex.sparks',
-    'graphics/QuaternionCalculator',
     'underscore'
-], function (THREE, SPARKS, THREExSparks, QuaternionCalculator, _) {
+], function (THREE, SPARKS, THREExSparks, _) {
     'use strict';
 
-    function DynamicLine(engine, options) {
+    function DynamicLine(options) {
         var opts = options || {};
         /*
         * Dynamic geometry is hard!
@@ -28,7 +27,7 @@ define([
         * when we have finished with them.
         */
         
-        this.setParticleSize(opts.particleSize || 30);
+        this.setParticleSize(opts.particleSize || 300);
         
         this.particleAcceleration = opts.particleAcceleration || new SPARKS.Accelerate(0, -0.1, 0);
         
@@ -37,8 +36,6 @@ define([
         this.timeToLive = opts.timeToLive || 10;
         
         this.setBufferSize(opts.bufferSize || 2000);
-            
-        this.calculator = new QuaternionCalculator();
         
         this.sparker = new THREExSparks({
             maxParticles: this.bufferSize,
@@ -58,33 +55,57 @@ define([
             this.setDrift(0.2, 0, 0.2);
         }
         
-        var initColorSize = _.bind(function () {
+        // A rare occasion where the 'that' trick
+        // is a bit easier than _.bind
+        var that = this;
+        // Look, a constructor function!
+        // "this" is now an InitColorSize instance
+        var InitColorSize = function () {
             this.initialize = function (emitter, particle) {
-                particle.target.color().setHSV(this.currentHSV[0], this.currentHSV[1], this.currentHSV[2]);
-                particle.target.size(this.particleSize);
+                particle.target.color().setHSL(that.currentHSV[0], that.currentHSV[1], that.currentHSV[2]);
+                particle.target.size(that.particleSize);
             };
-        }, this);
+        };
         
         // Other bits
-        emitter.addInitializer(new initColorSize());
+        emitter.addInitializer(new InitColorSize());
         emitter.addInitializer(new SPARKS.Position(new SPARKS.PointZone(this.currentPosition)));
         // No randomness, all particles have the same TTL
         emitter.addInitializer(new SPARKS.Lifetime(this.timeToLive));
-        emitter.addInitializer(new SPARKS.Velocity(new SPARKS.PointZone(this.currentRotation)));
+        // emitter.addInitializer(new SPARKS.Velocity(new SPARKS.PointZone(this.currentRotation)));
         
         emitter.addAction(new SPARKS.Age());
         emitter.addAction(new SPARKS.Move());
         //emitter.addAction(this.randomDrift);
         emitter.addAction(this.particleAcceleration);
         
-        // start the emitter
-        this.sparker.emitter().start();
-        // add the container to THREE.scene
-        engine.addObject(this.sparker.container(), _.bind(function () {
-            this.onRender();
-        }, this));
+        // Are we running
+        this.isRunning = false;
+        
+        // the container is what has to be added to THREE.scene
+        this.threeObject = this.sparker.container();
+        // save GPU cycles by not rendering it at this time
+        this.threeObject.visible = false;
     }
   
+    DynamicLine.prototype.start = function () {
+        this.isRunning = true;
+        // start the emitter
+        this.sparker.emitter().start();
+        // Start frame updates
+        this.startAnimation();
+        // tell the scene to render it
+        this.threeObject.visible = true;
+    };
+    
+    DynamicLine.prototype.stop = function () {
+        this.isRunning = false;
+        // start the emitter
+        this.sparker.emitter().stop();
+        // disable rendering
+        this.threeObject.visible = false;
+    };
+    
     DynamicLine.prototype.setParticleSize = function (diameter) {
         if (diameter > 0) {
             this.particleSize = diameter;
@@ -144,18 +165,31 @@ define([
         this.currentPosition.set(x, y, z);
     };
   
-    DynamicLine.prototype.setRotation = function (matrix) {
-        this.currentRotation.applyQuaternion(this.calculator.quaternionFromMatrix(matrix));
+    DynamicLine.prototype.setRotation = function (r) {
+        this.currentRotation.applyMatrix3(new THREE.Matrix3(
+            r[0], r[1], r[2],
+            r[3], r[4], r[5],
+            r[6], r[7], r[8]
+        ));
     };
   
     DynamicLine.prototype.setColor = function (h, s, v) {
         this.currentHSV = [h, s, v];
     };
     
-    DynamicLine.prototype.onRender = function () {
-        if (this.sparker) {
-            this.sparker.update();
-        }
+    DynamicLine.prototype.startAnimation = function () {
+        var animate = _.bind(function () {
+            if (this.sparker) {
+                this.sparker.update();
+            }
+            
+            // Tail recursion
+            if (this.isRunning) {
+                window.requestAnimationFrame(animate);
+            }
+        }, this);
+        
+        animate();
     };
 
     return DynamicLine;
