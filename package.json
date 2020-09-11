@@ -5,7 +5,7 @@
     "author": "Chris Kilding <mr.chris.k@gmail.com>",
     "dependencies": {
         "connect": "2.4.5",
-		"ws": "0.4.29",
+		"ws": "7.3.1",
         "webrtc.io": "0.0.4",
         "signals": "1.0.0",
         "express": "3.3.7",
